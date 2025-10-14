@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa eletrônico</title>
+    <style></style>
+</head>
+<body>
+    <div id="cabecalho" class="cabecalho">
+        <h1>Sistema de cadastro e login</h1>
+    </div>
+
+    <br><br>
+    
+    <div id="paginaSemLogin">
+        <div id="inicio">
+            <button onclick="AbrirCadastro()">Cadastrar</button>
+            <p>Caso você ainda não tenha criado uma conta.</p>
+            <br>
+            <button onclick="AbrirLogin()">Fazer login</button>
+            <p>Caso você já tenha uma conta cadastrada.</p>
+            <br>
+        </div>
+
+        <div id="cadastro" class="hidden">
+            <h2>Cadastro</h2>
+            <p>Nome: <input type="text" id="nomeInputCadastro" placeholder="Digite seu nome completo"></p>
+            <p>Email: <input type="email" id="emailInputCadastro" placeholder="Digite seu email"></p>
+            <p>Número da agência: <input type="number" id="numAgenciaInputCadastro" placeholder="Digite o número de sua agência"></p>
+            <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta"></p>
+            <p>Senha: <input type="password" id="senhaInputCadastro" placeholder="Crie uma senha de acesso para a sua conta"></p>
+            <button onclick="CadastrarUsuario()">Cadastrar</button>
+            <button onclick="FecharCadastro()">Cancelar</button>
+        </div>
+
+        <div id="login" class="hidden">
+            <h2>Login</h2>
+            <p>Número da agência: <input type="number" id="numAgenciaInputCadastro" placeholder="Digite o número de sua agência"></p>
+            <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta"></p>
+            <p>Senha: <input type="password" id="senhaInputCadastro" placeholder="Crie uma senha de acesso para a sua conta"></p>
+            <button onclick="FazerLogin()">Acessar</button>
+            <button onclick="FecharLogin()">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="paginaInicial"></div>
+
+</body>
+</html>
