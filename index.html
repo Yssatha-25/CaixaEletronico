@@ -14,6 +14,10 @@
             color: rgb(255, 113, 191);
             cursor: pointer;
         }
+
+        .hidden{
+            display: none;
+        }
     </style>
 </head>
 
@@ -31,7 +35,7 @@
         <p>Número da conta: <input type="number" id="numContaInputLogin" placeholder="Digite o número de sua conta">
         </p>
         <p>Senha: <input type="password" id="senhaInputLogin" placeholder="Digite sua senha de acesso"></p>
-        <p>Não possui uma conta? <a href="#" onclick="AbrirCadastro">Cadastre-se</a></p>
+        <p>Não possui uma conta? <a href="#" onclick="AbrirCadastro ()">Cadastre-se</a></p>
         <button onclick="FazerLogin()">Acessar</button>
     </div>
 
@@ -45,9 +49,19 @@
         <button onclick="CadastrarUsuario()">Cadastrar</button>
         <button onclick="FecharCadastro()">Cancelar</button>
     </div>
-    
-    <script>
 
+    <script>
+        const divLogin = document.getElementById("login")
+        const divCadastro = document.getElementById("cadastro")
+
+        function AbrirCadastro(){
+            divLogin.classList.add("hidden")
+            divCadastro.classList.remove("hidden")
+        }
+        function FecharCadastro(){
+            divLogin.classList.remove("hidden")
+            divCadastro.classList.add("hidden")
+        }
     </script>
 </body>
 
