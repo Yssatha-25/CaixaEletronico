@@ -35,7 +35,7 @@
         <p>Número da conta: <input type="number" id="numContaInputLogin" placeholder="Digite o número de sua conta"></p>
         <p>Senha: <input type="password" id="senhaInputLogin" placeholder="Digite sua senha de acesso"></p>
         <p>Não possui uma conta? <a href="#" onclick="AbrirCadastro()">Cadastre-se</a></p>
-        <button onclick="VerificarLoginValido()">Acessar</button>
+        <button onclick="FazerLogin()">Acessar</button>
     </div>
 
     <div id="cadastro" class="hidden">
@@ -83,6 +83,8 @@
             divCadastro.classList.add("hidden")
         }
 
+        // CADASTRO
+
         // LOGIN
         function VerificarLoginValido() {
             for (let i = 0; i < usuarios.length; i++) {
@@ -91,8 +93,17 @@
                 }
             }
             return false
-            alert("Senha ou número da conta incorretos.")
         }
+
+        function FazerLogin(){
+            if(VerificarLoginValido()){
+                alert("Login realizado com sucesso!")
+            }
+            else{
+                alert("Senha ou número da conta incorretos.")
+            }
+        }
+        
 
     </script>
 </body>
