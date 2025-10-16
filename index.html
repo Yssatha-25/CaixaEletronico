@@ -15,7 +15,7 @@
             cursor: pointer;
         }
 
-        .hidden{
+        .hidden {
             display: none;
         }
     </style>
@@ -32,36 +32,68 @@
         <h2>Login</h2>
         <p>Número da agência: <input type="number" id="numAgenciaInputLogin"
                 placeholder="Digite o número de sua agência"></p>
-        <p>Número da conta: <input type="number" id="numContaInputLogin" placeholder="Digite o número de sua conta">
-        </p>
+        <p>Número da conta: <input type="number" id="numContaInputLogin" placeholder="Digite o número de sua conta"></p>
         <p>Senha: <input type="password" id="senhaInputLogin" placeholder="Digite sua senha de acesso"></p>
-        <p>Não possui uma conta? <a href="#" onclick="AbrirCadastro ()">Cadastre-se</a></p>
-        <button onclick="FazerLogin()">Acessar</button>
+        <p>Não possui uma conta? <a href="#" onclick="AbrirCadastro()">Cadastre-se</a></p>
+        <button onclick="VerificarLoginValido()">Acessar</button>
     </div>
 
     <div id="cadastro" class="hidden">
         <h2>Cadastro</h2>
         <p>Nome: <input type="text" id="nomeInputCadastro" placeholder="Digite seu nome completo"></p>
         <p>Email: <input type="email" id="emailInputCadastro" placeholder="Digite seu email"></p>
-        <p>Número da agência: <input type="number" id="numAgenciaInputCadastro" placeholder="Digite o número de sua agência"></p>
-        <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta"></p>
-        <p>Senha: <input type="password" id="senhaInputCadastro" placeholder="Crie uma senha de acesso para a sua conta"></p>
+        <p>Número da agência: <input type="number" id="numAgenciaInputCadastro"
+                placeholder="Digite o número de sua agência"></p>
+        <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta">
+        </p>
+        <p>Senha: <input type="password" id="senhaInputCadastro"
+                placeholder="Crie uma senha de acesso para a sua conta"></p>
         <button onclick="CadastrarUsuario()">Cadastrar</button>
         <button onclick="FecharCadastro()">Cancelar</button>
     </div>
 
     <script>
+        // array dos usuários
+        usuarios = JSON.parse(localStorage.getItem("usuarios")) || []
+
+        // divs
         const divLogin = document.getElementById("login")
         const divCadastro = document.getElementById("cadastro")
 
-        function AbrirCadastro(){
+        // inputs
+
+        // ==> login
+        const numAgenciaLogin = document.getElementById("numAgenciaInputLogin")
+        const numContaLogin = document.getElementById("numContaInputLogin")
+        const senhaLogin = document.getElementById("senhaInputLogin")
+
+        // ==> cadastro
+        const nomeCadastro = document.getElementById("nomeInputCadastro")
+        const emailCadastro = document.getElementById("emailInputCadastro")
+        const numAgenciaCadastro = document.getElementById("numAgenciaInputCadastro")
+        const numContaCadastro = document.getElementById("numContaInputCadastro")
+
+        // funções de abrir e fechar seções
+        function AbrirCadastro() {
             divLogin.classList.add("hidden")
             divCadastro.classList.remove("hidden")
         }
-        function FecharCadastro(){
+        function FecharCadastro() {
             divLogin.classList.remove("hidden")
             divCadastro.classList.add("hidden")
         }
+
+        // LOGIN
+        function VerificarLoginValido() {
+            for (let i = 0; i < usuarios.length; i++) {
+                if (numContaCadastro.value.trim() == usuarios[i].numero_conta && senhaLogin.value.trim() == usuarios[i].senha) {
+                    return true
+                }
+            }
+            return false
+            alert("Senha ou número da conta incorretos.")
+        }
+
     </script>
 </body>
 
