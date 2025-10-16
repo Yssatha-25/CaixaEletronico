@@ -43,8 +43,7 @@
         <p>Nome: <input type="text" id="nomeInputCadastro" placeholder="Digite seu nome completo"></p>
         <p>Email: <input type="email" id="emailInputCadastro" placeholder="Digite seu email"></p>
         <p>Número da agência: <input type="number" id="numAgenciaInputCadastro" placeholder="Digite o número de sua agência"></p>
-        <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta">
-        </p>
+        <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta"></p>
         <p>Senha: <input type="password" id="senhaInputCadastro" placeholder="Crie uma senha de acesso para a sua conta"></p>
         <button onclick="CadastrarUsuario()">Cadastrar</button>
         <button onclick="FecharCadastro()">Cancelar</button>
@@ -70,6 +69,7 @@
         const emailCadastro = document.getElementById("emailInputCadastro")
         const numAgenciaCadastro = document.getElementById("numAgenciaInputCadastro")
         const numContaCadastro = document.getElementById("numContaInputCadastro")
+        const senhaCadastro = document.getElementById("senhaInputCadastro")
 
         // funções de abrir e fechar seções
         function AbrirCadastro() {
@@ -82,14 +82,45 @@
         }
 
         // CADASTRO
-        function VerificarUsuarioExiste(){
-            for (let i = 0; i < usuarios.length; i++){
-                if(toString(numContaCadastro.value.trim()) == usuarios[i].numero_conta){
+        function VerificarUsuarioExiste() {
+            for (let i = 0; i < usuarios.length; i++) {
+                if (toString(numContaCadastro.value.trim()) == usuarios[i].numero_conta) {
                     return true
                 }
             }
             return false
         }
+
+        function CadastrarUsuario() {
+                if (!VerificarUsuarioExiste()) {
+                    let usuario = {
+                        titular: nomeCadastro.value.trim(),
+                        agencia: toString(numAgenciaCadastro.value).trim(),
+                        numero_conta: toString(numContaCadastro.value).trim(),
+                        email: emailCadastro.value.trim(),
+                        senha: senhaCadastro.value.trim(),
+                        saldo: 0,
+                        sacar: function Sacar(valor){
+                            if(this.saldo >= valor)
+                            this.saldo = this.saldo - valor
+                            else
+                                alert("Saldo insuficiente!")
+                        },
+                        depositar: function Depositar(valor){
+                            if(valor > 0)
+                            this.saldo = this.saldo + valor 
+                            else
+                            alert("Digite um valor válido!")
+                        }
+                    }
+                    usuarios.push(usuario)
+                    localStorage.setItem("usuarios", usuarios)
+                    alert("Seu cadastro foi realizado com sucesso!")
+                }
+                else {
+                    alert("Um usuário com este número de conta já foi cadastrado.")
+                }
+            }
 
         // LOGIN
         function VerificarLoginValido() {
@@ -101,15 +132,15 @@
             return false
         }
 
-        function FazerLogin(){
-            if(VerificarLoginValido()){
+        function FazerLogin() {
+            if (VerificarLoginValido()) {
                 alert("Login realizado com sucesso!")
             }
-            else{
+            else {
                 alert("Senha ou número da conta incorretos.")
             }
         }
-        
+
 
     </script>
 </body>
