@@ -42,12 +42,10 @@
         <h2>Cadastro</h2>
         <p>Nome: <input type="text" id="nomeInputCadastro" placeholder="Digite seu nome completo"></p>
         <p>Email: <input type="email" id="emailInputCadastro" placeholder="Digite seu email"></p>
-        <p>Número da agência: <input type="number" id="numAgenciaInputCadastro"
-                placeholder="Digite o número de sua agência"></p>
+        <p>Número da agência: <input type="number" id="numAgenciaInputCadastro" placeholder="Digite o número de sua agência"></p>
         <p>Número da conta: <input type="number" id="numContaInputCadastro" placeholder="Digite o número de sua conta">
         </p>
-        <p>Senha: <input type="password" id="senhaInputCadastro"
-                placeholder="Crie uma senha de acesso para a sua conta"></p>
+        <p>Senha: <input type="password" id="senhaInputCadastro" placeholder="Crie uma senha de acesso para a sua conta"></p>
         <button onclick="CadastrarUsuario()">Cadastrar</button>
         <button onclick="FecharCadastro()">Cancelar</button>
     </div>
@@ -84,11 +82,19 @@
         }
 
         // CADASTRO
+        function VerificarUsuarioExiste(){
+            for (let i = 0; i < usuarios.length; i++){
+                if(toString(numContaCadastro.value.trim()) == usuarios[i].numero_conta){
+                    return true
+                }
+            }
+            return false
+        }
 
         // LOGIN
         function VerificarLoginValido() {
             for (let i = 0; i < usuarios.length; i++) {
-                if (numContaCadastro.value.trim() == usuarios[i].numero_conta && senhaLogin.value.trim() == usuarios[i].senha) {
+                if (toString(numContaLogin.value.trim()) == usuarios[i].numero_conta && senhaLogin.value.trim() == usuarios[i].senha) {
                     return true
                 }
             }
