@@ -22,9 +22,9 @@
 </head>
 
 <body>
-    <div id="cabecalho" class="cabecalho">
+    <header>
         <h1>Sistema de cadastro e login</h1>
-    </div>
+    </header>
 
     <br><br>
 
@@ -49,6 +49,8 @@
         <button onclick="FecharCadastro()">Cancelar</button>
     </div>
 
+    <div id="paginaInicial" class="hidden"></div>
+
     <script>
         // array dos usuários
         usuarios = JSON.parse(localStorage.getItem("usuarios")) || []
@@ -56,6 +58,7 @@
         // divs
         const divLogin = document.getElementById("login")
         const divCadastro = document.getElementById("cadastro")
+        const divPaginaInicial = document.getElementById("paginaInicial")
 
         // inputs
 
@@ -137,7 +140,7 @@
         // LOGIN
         function VerificarLoginValido() {
             for (let i = 0; i < usuarios.length; i++) {
-                if (string(numContaLogin.value.trim()) == usuarios[i].numero_conta && string(numAgenciaLogin.value.trim()) == usuarios[i].agencia && senhaLogin.value.trim() == usuarios[i].senha) {
+                if (String(numContaLogin.value.trim()) == usuarios[i].numero_conta && String(numAgenciaLogin.value.trim()) == usuarios[i].agencia && senhaLogin.value.trim() == usuarios[i].senha) {
                     return true
                 }
             }
@@ -151,8 +154,14 @@
             else {
                 alert("Senha ou número da conta incorretos.")
             }
+
+            AbrirPaginaInicial()
         }
 
+        function AbrirPaginaInicial(){
+            divPaginaInicial.classList.remove("hidden")
+            divLogin.classList.add("hidden")
+        }
 
     </script>
 </body>
