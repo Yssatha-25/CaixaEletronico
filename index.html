@@ -75,16 +75,26 @@
         function AbrirCadastro() {
             divLogin.classList.add("hidden")
             divCadastro.classList.remove("hidden")
+
+            numAgenciaLogin.value = ""
+            numContaLogin.value = ""
+            senhaLogin.value = ""
         }
         function FecharCadastro() {
             divLogin.classList.remove("hidden")
             divCadastro.classList.add("hidden")
+
+            nomeCadastro.value = ""
+            emailCadastro.value = ""
+            numAgenciaCadastro.value = ""
+            numContaCadastro.value = ""
+            senhaCadastro.value = ""
         }
 
         // CADASTRO
         function VerificarUsuarioExiste() {
             for (let i = 0; i < usuarios.length; i++) {
-                if (toString(numContaCadastro.value.trim()) == usuarios[i].numero_conta) {
+                if (String(numContaCadastro.value.trim()) == usuarios[i].numero_conta) {
                     return true
                 }
             }
@@ -95,8 +105,8 @@
                 if (!VerificarUsuarioExiste()) {
                     let usuario = {
                         titular: nomeCadastro.value.trim(),
-                        agencia: toString(numAgenciaCadastro.value).trim(),
-                        numero_conta: toString(numContaCadastro.value).trim(),
+                        agencia: String(numAgenciaCadastro.value).trim(),
+                        numero_conta: String(numContaCadastro.value).trim(),
                         email: emailCadastro.value.trim(),
                         senha: senhaCadastro.value.trim(),
                         saldo: 0,
@@ -114,8 +124,10 @@
                         }
                     }
                     usuarios.push(usuario)
-                    localStorage.setItem("usuarios", usuarios)
+                    localStorage.setItem("usuarios", JSON.stringify(usuarios))
                     alert("Seu cadastro foi realizado com sucesso!")
+
+                    FecharCadastro()
                 }
                 else {
                     alert("Um usuário com este número de conta já foi cadastrado.")
@@ -125,7 +137,7 @@
         // LOGIN
         function VerificarLoginValido() {
             for (let i = 0; i < usuarios.length; i++) {
-                if (toString(numContaLogin.value.trim()) == usuarios[i].numero_conta && senhaLogin.value.trim() == usuarios[i].senha) {
+                if (string(numContaLogin.value.trim()) == usuarios[i].numero_conta && string(numAgenciaLogin.value.trim()) == usuarios[i].agencia && senhaLogin.value.trim() == usuarios[i].senha) {
                     return true
                 }
             }
